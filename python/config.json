@@ -1,0 +1,5 @@
+{
+    "task_class": "MyDummyAnalysis",
+    "task_name": "my-dummy-analysis",
+    "outputfilename": "my_dummy_task" 
+}
