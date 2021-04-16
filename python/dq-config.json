@@ -1,5 +1,4 @@
 {
     "task_class": "MyDQMuonAnalysis",
-    "task_name": "my-dq-muon-analysis",
     "outputfilename": "my-DQ-Task" 
 }

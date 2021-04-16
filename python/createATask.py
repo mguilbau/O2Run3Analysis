@@ -37,7 +37,6 @@ with open(infile, "r") as read_file:
 
 print('-- This script will create your analysis task --')
 print('   Config file: ' + ''   + infile)
-print('      ~~> task name:'   + '  ' + data['task_name'])
 print('      ~~> class name:'  + ' '  + data['task_class'])
 print('Your task will be generated with the name: ' + data['outputfilename'] + '.cxx')
 
@@ -51,15 +50,14 @@ template = Template("""#include "Framework/runDataProcessing.h"
 struct {{ task_class }}  {
 };
     
-WorkflowSpec defineDataProcessing(ConfigContext const&) {
-      return WorkflowSpec{
-                adaptAnalysisTask<{{ task_class }}>("{{ task_name }}")
-             };
+WorkflowSpec defineDataProcessing(ConfigContext const& cfgc) {
+   return WorkflowSpec{
+                adaptAnalysisTask<{{ task_class }}>(cfgc)};
 }
     """)
 
 ## ------- Parse arguments and write in files
 
 with open(data['outputfilename']+'.cxx', 'w') as f:
-    print(template.render(task_class=data['task_class'],task_name=data['task_name']), file=f)
+    print(template.render(task_class=data['task_class']), file=f)
 
