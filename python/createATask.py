@@ -45,13 +45,15 @@ print('Your task will be generated with the name: ' + data['outputfilename'] + '
 
 template = Template("""#include "Framework/runDataProcessing.h"
 #include "Framework/AnalysisTask.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/ASoAHelpers.h"
     
 struct {{ task_class }}  {
 };
     
 WorkflowSpec defineDataProcessing(ConfigContext const&) {
       return WorkflowSpec{
-                adaptAnalysisTask<MyTask>("{{ task_name }}")
+                adaptAnalysisTask<{{ task_class }}>("{{ task_name }}")
              };
 }
     """)
