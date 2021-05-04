@@ -43,11 +43,36 @@ print('Your task will be generated with the name: ' + data['outputfilename'] + '
 ## ------- Create template
 
 template = Template("""#include "Framework/runDataProcessing.h"
+#include "Framework/runDataProcessing.h"
 #include "Framework/AnalysisTask.h"
 #include "Framework/AnalysisDataModel.h"
 #include "Framework/ASoAHelpers.h"
+#include "AnalysisDataModel/ReducedInfoTables.h"
+#include "PWGDQCore/VarManager.h"
+#include "PWGDQCore/HistogramManager.h"
+#include "PWGDQCore/AnalysisCut.h"
+#include "PWGDQCore/AnalysisCompositeCut.h"
+#include "PWGDQCore/HistogramsLibrary.h"
+#include "PWGDQCore/CutsLibrary.h"
+
+using MyEvents = soa::Join<aod::ReducedEvents, aod::ReducedEventsExtended>;
+using MyMuonTracks = soa::Join<aod::ReducedMuons, aod::ReducedMuonsExtra>;
     
 struct {{ task_class }}  {
+
+  void init(o2::framework::InitContext&)
+  {
+     //Initialize variables
+  }
+
+  void process(MyEvents::iterator const& event, MyMuonTracks const& muons)
+  {
+     //process something
+     for (auto& muon : muons) {
+    
+     }
+  }
+
 };
     
 WorkflowSpec defineDataProcessing(ConfigContext const& cfgc) {
