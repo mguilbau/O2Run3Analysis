@@ -55,8 +55,13 @@ template = Template("""#include "Framework/runDataProcessing.h"
 #include "PWGDQCore/HistogramsLibrary.h"
 #include "PWGDQCore/CutsLibrary.h"
 
-using MyEvents = soa::Join<aod::ReducedEvents, aod::ReducedEventsExtended>;
-using MyMuonTracks = soa::Join<aod::ReducedMuons, aod::ReducedMuonsExtra>;
+using namespace o2;
+using namespace o2::framework;
+using namespace o2::framework::expressions;
+using namespace o2::aod;
+
+using MyEvents = o2::soa::Join<o2::aod::ReducedEvents, o2::aod::ReducedEventsExtended>;
+using MyMuonTracks = soa::Join<o2::aod::ReducedMuons, o2::aod::ReducedMuonsExtra>;
     
 struct {{ task_class }}  {
 
@@ -75,8 +80,8 @@ struct {{ task_class }}  {
 
 };
     
-WorkflowSpec defineDataProcessing(ConfigContext const& cfgc) {
-   return WorkflowSpec{
+o2::framework::WorkflowSpec defineDataProcessing(o2::framework::ConfigContext const& cfgc) {
+   return o2::framework::WorkflowSpec{
                 adaptAnalysisTask<{{ task_class }}>(cfgc)};
 }
     """)
